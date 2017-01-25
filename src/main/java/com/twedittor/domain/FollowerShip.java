@@ -1,21 +1,20 @@
 package com.twedittor.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by sumanthdommaraju on 1/25/17.
  */
-@Entity
-@Table(name = "followerShip", schema = "twedittor")
+//@Entity
+//@Table(name = "followerShip", schema = "twedittor")
 public class FollowerShip implements Serializable{
 
-    @Id
-    @ManyToOne
+//    @Id
+//    @ManyToOne
     private User follower;
-    @Id
-    @ManyToOne
+//    @Id
+//    @ManyToOne
     private User followee;
 
     public User getFollower() {

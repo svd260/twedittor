@@ -13,11 +13,13 @@ public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long uid;
     private String userId;
     private String name;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="user")
     private List<Quote> quotes;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<User> following;
 
     public String getUserId() {
         return userId;
@@ -43,6 +45,14 @@ public class User implements Serializable{
         this.quotes = quotes;
     }
 
+    public List<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<User> following) {
+        this.following = following;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,10 +69,10 @@ public class User implements Serializable{
     }
 
     public Long getId() {
-        return id;
+        return uid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long uid) {
+        this.uid = uid;
     }
 }

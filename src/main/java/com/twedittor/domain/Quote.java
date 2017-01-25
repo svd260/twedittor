@@ -16,8 +16,8 @@ public class Quote implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long quoteId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name="uid", nullable=false)
     private User user;
     private String message;
     private int likes;
@@ -84,7 +84,7 @@ public class Quote implements Serializable{
 
         if (likes != quote.likes) return false;
         if (reQoute != quote.reQoute) return false;
-        if (user != null ? !user.equals(quote.user) : quote.user != null) return false;
+//        if (user != null ? !user.equals(quote.user) : quote.user != null) return false;
         if (message != null ? !message.equals(quote.message) : quote.message != null) return false;
         if (comments != null ? !comments.equals(quote.comments) : quote.comments != null) return false;
         return timeStamp != null ? timeStamp.equals(quote.timeStamp) : quote.timeStamp == null;
@@ -92,7 +92,7 @@ public class Quote implements Serializable{
 
     @Override
     public int hashCode() {
-        int result = user != null ? user.hashCode() : 0;
+        int result = 0;//user != null ? user.hashCode() : 0;
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + likes;
         result = 31 * result + reQoute;
