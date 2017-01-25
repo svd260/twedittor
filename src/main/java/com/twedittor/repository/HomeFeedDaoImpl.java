@@ -4,8 +4,6 @@ import com.twedittor.domain.Quote;
 import com.twedittor.domain.User;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,10 +12,7 @@ import java.util.List;
  */
 
 @Repository
-public class HomeFeedDaoImpl implements HomeFeedDao{
-
-    @PersistenceContext
-    private EntityManager entityManager;
+public class HomeFeedDaoImpl extends AbstractDao implements HomeFeedDao{
 
     @Override
     public List<Quote> getFeed(String userId) {
@@ -28,16 +23,8 @@ public class HomeFeedDaoImpl implements HomeFeedDao{
         User user = new User();
         user.setName("sam");
         user.setUserId("abc");
-        entityManager.persist(user);
-        entityManager.flush();
+        save(user);
         return mockList;
     }
 
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 }
