@@ -12,8 +12,7 @@ import java.util.List;
  * Created by sumanthdommaraju on 1/24/17.
  */
 @Service
-@Transactional
-public class HomeFeedServiceImpl implements IHomeFeedService{
+public class HomeFeedServiceImpl implements HomeFeedService {
 
     private HomeFeedRepo homeFeedRepo;
 
@@ -22,6 +21,7 @@ public class HomeFeedServiceImpl implements IHomeFeedService{
         this.homeFeedRepo = homeFeedRepo;
     }
 
+    @Transactional
     @Override
     public List<Quote> getFeed(String userId) {
         return homeFeedRepo.getFeed(userId);

@@ -1,7 +1,7 @@
 package com.twedittor.controller;
 
 import com.twedittor.domain.Home;
-import com.twedittor.service.HomeFeedServiceImpl;
+import com.twedittor.service.HomeFeedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +17,11 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/")
 public class HomeController {
 
-    private final HomeFeedServiceImpl homeFeedService;
+    private final HomeFeedService homeFeedService;
     private static final String USER_ID = "userId";
 
     @Autowired
-    public HomeController(HomeFeedServiceImpl homeFeedService) {
+    public HomeController(HomeFeedService homeFeedService) {
         this.homeFeedService = homeFeedService;
     }
 
