@@ -5,6 +5,8 @@ Idea is to create an application which contain features from twitter and reddit.
 
 Following technologies and frameworks are used so far:
 Spring Boot,
-Spring Web,
+Spring MVC,
 Jpa and Hibernate,
-Tomcat
+Tomcat,
+Mockito,
+JUnit
