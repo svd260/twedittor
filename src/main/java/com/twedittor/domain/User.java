@@ -1,9 +1,7 @@
 package com.twedittor.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,11 +9,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "user", schema = "twedittor")
-public class User {
+public class User implements Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String userId;
     private String name;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Quote> quotes;
 
     public String getUserId() {
@@ -55,5 +56,13 @@ public class User {
     @Override
     public int hashCode() {
         return userId.hashCode();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

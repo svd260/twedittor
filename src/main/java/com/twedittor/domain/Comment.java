@@ -1,6 +1,7 @@
 package com.twedittor.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 /**
  * Created by sumanthdommaraju on 1/24/17.
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comment", schema = "twedittor")
-public class Comment {
+public class Comment implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
