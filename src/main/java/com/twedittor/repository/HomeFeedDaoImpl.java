@@ -14,11 +14,12 @@ import java.util.List;
  */
 
 @Repository
-public class HomeFeedRepo {
+public class HomeFeedDaoImpl implements HomeFeedDao{
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     public List<Quote> getFeed(String userId) {
         List<Quote> mockList = Arrays.asList(new Quote(){{
                                                  setUser(new User(){{setName("pinku");}}); setLikes(10); setReQoute(5);}},
