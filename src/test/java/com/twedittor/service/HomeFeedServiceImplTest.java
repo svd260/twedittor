@@ -46,7 +46,7 @@ public class HomeFeedServiceImplTest {
 
     private User getMockUser() throws InterruptedException {
         User user = new User();
-        user.setUserId("Sam");
+        user.setUserName("Sam");
 
         User fUser1 = new User();
         fUser1.setName("noah");

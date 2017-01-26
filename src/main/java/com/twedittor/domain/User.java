@@ -14,19 +14,20 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
-    private String userId;
+    private String userName;
     private String name;
     @OneToMany(fetch = FetchType.LAZY, mappedBy="user")
     private List<Quote> quotes;
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "followers")
     private List<User> following;
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {
@@ -60,12 +61,12 @@ public class User implements Serializable{
 
         User user = (User) o;
 
-        return userId.equals(user.userId);
+        return userName.equals(user.userName);
     }
 
     @Override
     public int hashCode() {
-        return userId.hashCode();
+        return userName.hashCode();
     }
 
     public Long getId() {

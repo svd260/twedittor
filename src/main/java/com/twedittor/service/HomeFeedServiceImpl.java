@@ -26,8 +26,8 @@ public class HomeFeedServiceImpl implements HomeFeedService {
 
     @Transactional
     @Override
-    public List<Quote> getFeed(String userId) {
-        User user =  userDao.findUserByUserId(userId);
+    public List<Quote> getFeed(String userName) {
+        User user =  userDao.findUserByUserId(userName);
         List<Quote> feedQuotes = user.getFollowing().stream().map(u -> u.getQuotes()).
                             flatMap(quotesList -> quotesList.stream()).
                             sorted(Comparator.comparing(quote -> quote.getTimeStamp())).collect(Collectors.toList());

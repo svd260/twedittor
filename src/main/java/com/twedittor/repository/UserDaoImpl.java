@@ -11,8 +11,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
 
     @Override
-    public User findUserByUserId(String userId) {
-        return getResultForQuery("SELECT u FROM User u WHERE u.userId = :uid", new String[]{"uid"}, new Object[]{userId});
+    public User findUserByUserId(String userName) {
+        return getResultForQuery("SELECT u FROM User u WHERE u.userName = :userName", new String[]{"userName"}, new Object[]{userName});
     }
 
 }

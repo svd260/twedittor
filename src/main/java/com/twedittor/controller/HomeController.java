@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     private final HomeFeedService homeFeedService;
-    private static final String USER_ID = "userId";
+    private static final String USER_NAME = "userName";
 
     @Autowired
     public HomeController(HomeFeedService homeFeedService) {
@@ -29,9 +29,9 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public Home getHome(HttpSession session) {
         Home home = new Home();
-        String userId = (String) session.getAttribute(USER_ID);
-        home.setName(userId);
-        home.setQuotesFromFeed(homeFeedService.getFeed(userId));
+        String userName = (String) session.getAttribute(USER_NAME);
+        home.setName(userName);
+        home.setQuotesFromFeed(homeFeedService.getFeed(userName));
         return home;
     }
 }

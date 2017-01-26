@@ -20,7 +20,7 @@ public class HomeFeedDaoImpl extends AbstractDao implements HomeFeedDao{
 //                    setUser(new User(){{setName("sumu");}}); setLikes(8); setReQoute(6);}});
 //        User user = new User();
 //        user.setName("sam");
-//        user.setUserId("abc");
+//        user.setUserName("abc");
 //        save(user);
         return null;
     }

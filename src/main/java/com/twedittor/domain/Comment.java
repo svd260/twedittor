@@ -15,7 +15,9 @@ public class Comment implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
     private String comment;
-    private User commentedBy;
+    @ManyToOne
+    @JoinColumn(name="uid", nullable=false)
+    private User user;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quoteId", nullable = false)
     private Quote quote;
@@ -29,12 +31,12 @@ public class Comment implements Serializable{
         this.comment = comment;
     }
 
-    public User getCommentedBy() {
-        return commentedBy;
+    public User getUser() {
+        return user;
     }
 
-    public void setCommentedBy(User commentedBy) {
-        this.commentedBy = commentedBy;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public LocalDateTime getTimeStamp() {
@@ -53,7 +55,7 @@ public class Comment implements Serializable{
         Comment comment1 = (Comment) o;
 
         if (comment != null ? !comment.equals(comment1.comment) : comment1.comment != null) return false;
-        if (commentedBy != null ? !commentedBy.equals(comment1.commentedBy) : comment1.commentedBy != null)
+        if (user != null ? !user.equals(comment1.user) : comment1.user != null)
             return false;
         return timeStamp != null ? timeStamp.equals(comment1.timeStamp) : comment1.timeStamp == null;
     }
@@ -61,7 +63,7 @@ public class Comment implements Serializable{
     @Override
     public int hashCode() {
         int result = comment != null ? comment.hashCode() : 0;
-        result = 31 * result + (commentedBy != null ? commentedBy.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (timeStamp != null ? timeStamp.hashCode() : 0);
         return result;
     }
