@@ -29,14 +29,17 @@ public class HomeFeedServiceImplTest {
     }
 
     @Test
-    public void testGetFeed() {
+    public void testGetFeed() throws InterruptedException {
         when(mockUserDao.findUserByUserId(anyString())).thenReturn(getMockUser());
         List<Quote> quotes = homeFeedService.getFeed("Sam");
         assertEquals(6, quotes.size());
-        //TODO test order based on timestamp. Latest messages should come first.
+        int[] quoteIdsExpectedOrder = {3,4,2,1,5,6};
+        for(int i = 0; i < quoteIdsExpectedOrder.length; i++) {
+            assertEquals(quoteIdsExpectedOrder[i], quotes.get(i).getQuoteId());
+        }
     }
 
-    private User getMockUser() {
+    private User getMockUser() throws InterruptedException {
         User user = new User();
         user.setUserId("Sam");
 
@@ -50,15 +53,20 @@ public class HomeFeedServiceImplTest {
         fUser3.setName("colbert");
 
         Quote quote3 = new Quote();
-        quote3.setQuoteId(1); quote3.setMessage("After all, tomorrow is another day!"); quote3.setTimeStamp(LocalDateTime.now());
+        quote3.setQuoteId(3); quote3.setMessage("After all, tomorrow is another day!"); quote3.setTimeStamp(LocalDateTime.now());
+        Thread.sleep(1000);         //to make sure quotes timestamp differs atleast by 1 sec, so that the order can be tested
         Quote quote4 = new Quote();
-        quote4.setQuoteId(2); quote4.setMessage("may the force with you"); quote4.setTimeStamp(LocalDateTime.now());
+        quote4.setQuoteId(4); quote4.setMessage("may the force with you"); quote4.setTimeStamp(LocalDateTime.now());
+        Thread.sleep(1000);
         Quote quote2 = new Quote();
-        quote2.setQuoteId(3); quote2.setMessage("Houston, we have a problem."); quote2.setTimeStamp(LocalDateTime.now());
+        quote2.setQuoteId(2); quote2.setMessage("Houston, we have a problem."); quote2.setTimeStamp(LocalDateTime.now());
+        Thread.sleep(1000);
         Quote quote1 = new Quote();
-        quote1.setQuoteId(4); quote1.setMessage("Hasta la vista, baby."); quote1.setTimeStamp(LocalDateTime.now());
+        quote1.setQuoteId(1); quote1.setMessage("Hasta la vista, baby."); quote1.setTimeStamp(LocalDateTime.now());
+        Thread.sleep(1000);
         Quote quote5 = new Quote();
         quote5.setQuoteId(5); quote5.setMessage("Bond. James Bond."); quote5.setTimeStamp(LocalDateTime.now());
+        Thread.sleep(1000);
         Quote quote6 = new Quote();
         quote6.setQuoteId(6); quote6.setMessage("just in time"); quote6.setTimeStamp(LocalDateTime.now());
 
