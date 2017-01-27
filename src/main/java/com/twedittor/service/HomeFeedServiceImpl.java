@@ -1,5 +1,6 @@
 package com.twedittor.service;
 
+import com.twedittor.domain.Home;
 import com.twedittor.domain.Quote;
 import com.twedittor.domain.User;
 import com.twedittor.repository.UserDao;
@@ -27,7 +28,8 @@ public class HomeFeedServiceImpl implements HomeFeedService {
 
     @Transactional
     @Override
-    public List<Quote> getFeed(String userName) {
+    public Home getFeed(String userName) {
+        Home home = new Home();
         User user =  userDao.findUserByUserId(userName);
         List<Quote> feedQuotes = new ArrayList<>();
         List<User> follwing = user.getFollowing();
@@ -38,6 +40,11 @@ public class HomeFeedServiceImpl implements HomeFeedService {
 //                user.getFollowing().stream().map(u -> u.getQuotes()).
 //                            flatMap(quotesList -> quotesList.stream()).
 //                            sorted(Comparator.comparing(quote -> quote.getTimeStamp())).collect(Collectors.toList());
-        return feedQuotes;
+        home.setFirstName(user.getFirstName());
+        home.setLastName(user.getLastName());
+        home.setQuotesFromFeed(feedQuotes);
+        home.setFollowing(new Long(user.getFollowing().size()));  //TODO
+        home.setFollowers(new Long(userDao.findFollowers(user.getId()).size())); //TODO
+        return home;
     }
 }

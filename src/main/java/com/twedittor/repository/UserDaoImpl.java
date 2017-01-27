@@ -3,6 +3,8 @@ package com.twedittor.repository;
 import com.twedittor.domain.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by sumanthdommaraju on 1/25/17.
  */
@@ -20,6 +22,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         }
 
         return user;
+    }
+
+    @Override
+    public List<User> findFollowers(Long uid) {
+        return getResultListForNamedQuery("User.findFollowers", new String[]{"uid"}, new Object[]{uid});
     }
 
 }

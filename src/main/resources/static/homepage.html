@@ -6,13 +6,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="myApp.js"></script>
 <body>
-<div ng-app="myApp" >
-<section class="header">
+<div ng-app="myApp" ng-controller="HomeFeedController">
+<section class="header" >
     <div class="search">
         <input type="text" placeholder="Search" />
     </div>
     <div class="title"><p>Twedittor</p></div>
-    <div class="user" ng-controller="HomeFeedController">
+    <div class="user">
         <div class="user__notifications">
             <i class="ion-android-notifications"></i>
         </div>
@@ -24,8 +24,8 @@
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/adam_proPic.jpg" alt="Profile Picture" class="img-responsive" />
       </span>
             <span class="user__info__name">
-                <span class="first">{{home.name}}</span>
-                <span class="last">{{5+5}}</span>
+                <span class="first">{{home.firstName}}</span>
+                <span class="last">{{home.lastName}}</span>
             </span>
 
         </div>
@@ -54,11 +54,11 @@
                     </a>
                     <a href="#" class="navigation__list__item">
                         <i class="ion-radio-waves"></i>
-                        <span>Followers</span>
+                        <span>Followers({{home.followers}})</span>
                     </a>
                     <a href="#" class="navigation__list__item">
                         <i class="ion-radio-waves"></i>
-                        <span>Following</span>
+                        <span>Following({{home.following}})</span>
                     </a>
                 </div>
             </div>

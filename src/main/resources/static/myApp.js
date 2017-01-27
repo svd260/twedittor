@@ -51,10 +51,5 @@ app.controller('HomeFeedController', function ($scope, $http) {
     $http.get("http://localhost:8080/")
         .then(function(response) {
             $scope.home = response.data;
-            if($scope.home === undefined) {
-                window.alert("undefined");
-            } else {
-                window.alert("defined");
-            }
         })
 });

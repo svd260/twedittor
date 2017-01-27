@@ -28,11 +28,12 @@ public class HomeController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public Home getHome(HttpSession session) {
-        Home home = new Home();
-        String userName = "svd260";//(String) session.getAttribute(USER_NAME);//TODO
-        home.setName(userName);
-        home.setQuotesFromFeed(homeFeedService.getFeed(userName));
-        return home;
+//        Home home = new Home();
+//        String userName = "svd260";//(String) session.getAttribute(USER_NAME);//TODO
+//        home.setName(userName);
+//        home.setQuotesFromFeed(
+
+        return homeFeedService.getFeed("svd260");
     }
 
 }

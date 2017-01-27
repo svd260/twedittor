@@ -7,15 +7,26 @@ import java.util.List;
  */
 public class Home {
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private List<Quote> quotesFromFeed;
+    private Long followers;
+    private Long following;
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public List<Quote> getQuotesFromFeed() {
@@ -26,21 +37,19 @@ public class Home {
         this.quotesFromFeed = quotesFromFeed;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Home home = (Home) o;
-
-        if (name != null ? !name.equals(home.name) : home.name != null) return false;
-        return quotesFromFeed != null ? quotesFromFeed.equals(home.quotesFromFeed) : home.quotesFromFeed == null;
+    public Long getFollowers() {
+        return followers;
     }
 
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (quotesFromFeed != null ? quotesFromFeed.hashCode() : 0);
-        return result;
+    public void setFollowers(Long followers) {
+        this.followers = followers;
+    }
+
+    public Long getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Long following) {
+        this.following = following;
     }
 }

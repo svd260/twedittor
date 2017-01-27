@@ -38,7 +38,7 @@ public class HomeFeedServiceImplTest {
     @Ignore
     public void testGetFeed() throws InterruptedException {
         when(mockUserDao.findUserByUserId(anyString())).thenReturn(getMockUser());
-        List<Quote> quotes = homeFeedService.getFeed("Sam");
+        List<Quote> quotes = null;//TODO //homeFeedService.getFeed("Sam");
         assertEquals(5, quotes.size());
         int[] quoteIdsExpectedOrder = {3,4,2,1,5};
         for(int i = 0; i < quoteIdsExpectedOrder.length; i++) {

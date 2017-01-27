@@ -7,10 +7,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by sumanthdommaraju on 1/24/17.
+ * Created by sumanthdommaraju on 1/24/17.ß
  */
 @Entity
 @Table(name = "user", schema = "twedittor")
+@NamedQuery(name = "User.findFollowers",query = "select u from User u join u.following f where f.uid = :uid ")
 public class User implements Serializable{
 
     @Id
