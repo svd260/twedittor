@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by sumanthdommaraju on 1/24/17.
@@ -28,9 +29,15 @@ public class HomeFeedServiceImpl implements HomeFeedService {
     @Override
     public List<Quote> getFeed(String userName) {
         User user =  userDao.findUserByUserId(userName);
-        List<Quote> feedQuotes = user.getFollowing().stream().map(u -> u.getQuotes()).
-                            flatMap(quotesList -> quotesList.stream()).
-                            sorted(Comparator.comparing(quote -> quote.getTimeStamp())).collect(Collectors.toList());
+        List<Quote> feedQuotes = new ArrayList<>();
+        List<User> follwing = user.getFollowing();
+        for(User f : follwing) {
+            feedQuotes.addAll(f.getQuotes());
+        }
+        Collections.sort(feedQuotes, Comparator.comparing(quote -> quote.getTimeStamp()));
+//                user.getFollowing().stream().map(u -> u.getQuotes()).
+//                            flatMap(quotesList -> quotesList.stream()).
+//                            sorted(Comparator.comparing(quote -> quote.getTimeStamp())).collect(Collectors.toList());
         return feedQuotes;
     }
 }

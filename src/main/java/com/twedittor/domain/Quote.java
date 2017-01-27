@@ -1,9 +1,11 @@
 package com.twedittor.domain;
 
-import org.threeten.bp.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,13 +20,15 @@ public class Quote implements Serializable{
     private long quoteId;
     @ManyToOne
     @JoinColumn(name="uid", nullable=false)
+    @JsonBackReference
     private User user;
     private String message;
     private int likes;
     private int reQoute;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Comment> comments;
-    private LocalDateTime timeStamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timeStamp;
 
     public User getUser() {
         return user;
@@ -66,46 +70,19 @@ public class Quote implements Serializable{
         this.comments = comments;
     }
 
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Quote quote = (Quote) o;
-
-        if (likes != quote.likes) return false;
-        if (reQoute != quote.reQoute) return false;
-//        if (user != null ? !user.equals(quote.user) : quote.user != null) return false;
-        if (message != null ? !message.equals(quote.message) : quote.message != null) return false;
-        if (comments != null ? !comments.equals(quote.comments) : quote.comments != null) return false;
-        return timeStamp != null ? timeStamp.equals(quote.timeStamp) : quote.timeStamp == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 0;//user != null ? user.hashCode() : 0;
-        result = 31 * result + (message != null ? message.hashCode() : 0);
-        result = 31 * result + likes;
-        result = 31 * result + reQoute;
-        result = 31 * result + (comments != null ? comments.hashCode() : 0);
-        result = 31 * result + (timeStamp != null ? timeStamp.hashCode() : 0);
-        return result;
-    }
-
     public long getQuoteId() {
         return quoteId;
     }
 
     public void setQuoteId(long quoteId) {
         this.quoteId = quoteId;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }

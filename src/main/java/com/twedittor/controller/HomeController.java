@@ -29,9 +29,10 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public Home getHome(HttpSession session) {
         Home home = new Home();
-        String userName = (String) session.getAttribute(USER_NAME);
+        String userName = "svd260";//(String) session.getAttribute(USER_NAME);//TODO
         home.setName(userName);
         home.setQuotesFromFeed(homeFeedService.getFeed(userName));
         return home;
     }
+
 }

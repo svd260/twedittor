@@ -1,5 +1,7 @@
 package com.twedittor.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -15,10 +17,12 @@ public class User implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
     private String userName;
-    private String name;
+    private String firstName;
+    private String lastName;
     @OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+    @JsonManagedReference
     private List<Quote> quotes;
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "followers")
     private List<User> following;
 
@@ -30,12 +34,12 @@ public class User implements Serializable{
         this.userName = userName;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public List<Quote> getQuotes() {
@@ -54,21 +58,6 @@ public class User implements Serializable{
         this.following = following;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        return userName.equals(user.userName);
-    }
-
-    @Override
-    public int hashCode() {
-        return userName.hashCode();
-    }
-
     public Long getId() {
         return uid;
     }
@@ -76,4 +65,38 @@ public class User implements Serializable{
     public void setId(Long uid) {
         this.uid = uid;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        User user = (User) o;
+//
+//        if (uid != null ? !uid.equals(user.uid) : user.uid != null) return false;
+//        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
+//        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+//        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+//        if (quotes != null ? !quotes.equals(user.quotes) : user.quotes != null) return false;
+//        return following != null ? following.equals(user.following) : user.following == null;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = uid != null ? uid.hashCode() : 0;
+//        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+//        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+//        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+//        result = 31 * result + (quotes != null ? quotes.hashCode() : 0);
+//        result = 31 * result + (following != null ? following.hashCode() : 0);
+//        return result;
+//    }
 }
