@@ -7,6 +7,7 @@ import com.twedittor.repository.QuoteDao;
 import com.twedittor.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -25,6 +26,7 @@ public class QuoteServiceImpl implements QuoteService {
         this.userDao = userDao;
     }
 
+    @Transactional
     @Override
     public Boolean post(Quote quote, String uid) {
         User user = userDao.findUserByUserId(uid);

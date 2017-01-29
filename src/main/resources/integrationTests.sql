@@ -6,14 +6,14 @@ insert into user values (5, 'aakash', 'guntamadugu', 'aakash');
 insert into user values (6, 'diviteja', 'guntamadugu', 'divi');
 
 
-insert into followers values (1,1,3);
-insert into followers values (2,1,4);
-insert into followers values (3,1,5);
-insert into followers values (4,1,6);
-insert into followers values (5,2,3);
-insert into followers values (6,3,2);
-insert into followers values (7,4,1);
-insert into followers values (8,6,1);
+insert into Relationship values (1,1,3);
+insert into Relationship values (2,1,4);
+insert into Relationship values (3,1,5);
+insert into Relationship values (4,1,6);
+insert into Relationship values (5,2,3);
+insert into Relationship values (6,3,2);
+insert into Relationship values (7,4,1);
+insert into Relationship values (8,6,1);
 
 insert into quote(quoteId, uid, likes, message, reQoute, timestamp) values(1,1,2,'Frankly, my dear, I dont give a damn.	Gone With the Wind',2, NOW());
 insert into quote(quoteId, uid, likes, message, reQoute, timestamp) values(2,1,1,'Im going to make him an offer he cant refuse.	The Godfather',1, NOW());

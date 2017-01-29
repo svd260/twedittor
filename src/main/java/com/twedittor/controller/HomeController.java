@@ -7,7 +7,6 @@ import com.twedittor.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by sumanthdommaraju on 1/24/17.
  */
-@Controller
+@RestController
 @RequestMapping("/")
 public class HomeController {
 
@@ -39,8 +38,10 @@ public class HomeController {
         return homeFeedService.getFeed("svd260");
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> postQuote(@RequestBody Quote quote) {
+    @RequestMapping(value = "quote",method = RequestMethod.POST)//, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> postQuote(@RequestBody String msg) {
+        Quote quote = new Quote();
+         quote.setMessage(msg);
         Boolean posted = quoteService.post(quote, "svd260");
         ResponseEntity<String> responseEntity = null;
         if(posted) {

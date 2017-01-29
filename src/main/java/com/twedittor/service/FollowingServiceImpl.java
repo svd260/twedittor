@@ -4,6 +4,7 @@ import com.twedittor.domain.User;
 import com.twedittor.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ public class FollowingServiceImpl implements FollowingService {
     }
 
     @Override
+    @Transactional
     public List<User> getFollowing(String uid) {
         return userDao.findUserByUserId("svd260").getFollowing().stream()
                 .map(relationship -> relationship.getFollowed()).collect(Collectors.toList()); //TODO
