@@ -1,7 +1,28 @@
 /**
  * Created by sumanthdommaraju on 1/26/17.
  */
-var app = angular.module('myApp',[]);
+var app = angular.module('myApp', ['ngRoute']);
+
+app.config(function($routeProvider) {
+    $routeProvider
+
+        .when('/', {
+            templateUrl : 'feed.html',
+            controller  : 'HomeFeedController'
+        })
+
+        .when('/following', {
+            templateUrl : 'following.html',
+            controller  : 'FollowingController'
+        })
+
+        .when('/followers', {
+            templateUrl : 'followers.html',
+            controller  : 'FollowersController'
+        })
+
+        .otherwise({redirectTo: '/'});
+});
 
 // app.factory('HomeFeedService',function($http) {
 //
@@ -51,5 +72,12 @@ app.controller('HomeFeedController', function ($scope, $http) {
     $http.get("http://localhost:8080/")
         .then(function(response) {
             $scope.home = response.data;
+        })
+});
+
+app.controller('FollowingController',function ($scope, $http) {
+    $http.get("http://localhost:8080/following")
+        .then(function(response) {
+            $scope.following = response.data;
         })
 });

@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -74,7 +73,7 @@ public class HomeFeedServiceImplTest {
 //        fUser1.setQuotes(Arrays.asList(quote1, quote2));
 //        fUser2.setQuotes(Arrays.asList(quote4, quote3));
 //        fUser3.setQuotes(Arrays.asList(quote5));
-        user.setFollowing(Arrays.asList(fUser1, fUser2, fUser3));
+//        user.setFollowing(Arrays.asList(fUser1, fUser2, fUser3));
         return user;
     }
 }

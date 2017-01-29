@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface UserDao  {
     User findUserByUserId(String userId);
-    List<User> findFollowers(Long uid);
+    List<User> findFollowers(User user);
 }

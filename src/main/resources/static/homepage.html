@@ -4,47 +4,49 @@
     <link rel="stylesheet" href="css/myStyle.css" type="text/css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular.js/1.4.8/angular-route.min.js"></script>
 <script src="myApp.js"></script>
 <body>
-<div ng-app="myApp" ng-controller="HomeFeedController">
-<section class="header" >
-    <div class="search">
-        <input type="text" placeholder="Search" />
-    </div>
-    <div class="title"><p>Twedittor</p></div>
-    <div class="user">
-        <div class="user__notifications">
-            <i class="ion-android-notifications"></i>
+<div ng-app="myApp">
+<div ng-controller="HomeFeedController">
+    <section class="header" >
+        <div class="search">
+            <input type="text" placeholder="Search" />
         </div>
-        <div class="user__inbox">
-            <i class="ion-archive"></i>
-        </div>
-        <div class="user__info">
-      <span class="user__info__img">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/adam_proPic.jpg" alt="Profile Picture" class="img-responsive" />
-      </span>
-            <span class="user__info__name">
-                <span class="first">{{home.firstName}}</span>
-                <span class="last">{{home.lastName}}</span>
-            </span>
+        <div class="title"><p>Twedittor</p></div>
+        <div class="user">
+            <div class="user__notifications">
+                <i class="ion-android-notifications"></i>
+            </div>
+            <div class="user__inbox">
+                <i class="ion-archive"></i>
+            </div>
+            <div class="user__info">
+          <span class="user__info__img">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/adam_proPic.jpg" alt="Profile Picture" class="img-responsive" />
+          </span>
+                <span class="user__info__name">
+                    <span class="first">{{home.firstName}}</span>
+                    <span class="last">{{home.lastName}}</span>
+                </span>
 
+            </div>
+            <div class="user__actions">
+                <button class="button-light">
+                    logout
+                </button>
+            </div>
         </div>
-        <div class="user__actions">
-            <button class="button-light">
-                logout
-            </button>
-        </div>
-    </div>
-</section>
+    </section>
+</div>
+    <section class="content">
 
-<section class="content">
-
-    <div class="content__left">
+    <div class="content__left" ng-controller="HomeFeedController">
 
         <section class="navigation">
             <div class="navigation__list">
                 <div class="collapse in" id="main">
-                    <a href="#" class="navigation__list__item">
+                    <a href="#/" class="navigation__list__item">
                         <i class="ion-ios-browsers"></i>
                         <span>Home</span>
                     </a>
@@ -56,7 +58,7 @@
                         <i class="ion-radio-waves"></i>
                         <span>Followers({{home.followers}})</span>
                     </a>
-                    <a href="#" class="navigation__list__item">
+                    <a href="#/following" class="navigation__list__item">
                         <i class="ion-radio-waves"></i>
                         <span>Following({{home.following}})</span>
                     </a>
@@ -110,7 +112,7 @@
 
                     </div>
 
-                    <div class="artist__info__meta">
+                    <div class="artist__info__meta" ng-controller="HomeFeedController">
 
                         <div class="artist__info__type">Artist</div>
 
@@ -193,37 +195,7 @@
 
                             <div class="overview__artist">
 
-                                <!-- / -->
-
-                                <!-- Popular-->
-                                <div class="section-title">Quotes</div>
-
-                                <div class="tracks">
-                                    <!--<ul ng-repeat="quote in home.quotesFromFeed"><li>{{quote.message}}</li>-->
-                                    <!--</ul>-->
-                                    <div ng-repeat="quote in home.quotesFromFeed" class="track">
-                                        <div class="track__art">
-                                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/whenDarkOut.jpg" alt="When It's Dark Out" />
-                                        </div>
-                                        <div class="track__number">{{quote.quoteId}}</div>
-                                        <div class="track__added">
-                                            <i class="ion-checkmark-round added"></i>
-                                        </div>
-                                        <div class="track__title">{{quote.message}}</div>
-                                        <div class="track__explicit">
-                                            <span class="label">Likes</span>
-                                        </div>
-                                        <div class="track__plays">{{quote.likes}}</div>
-                                        <div class="track__explicit">
-                                            <span class="label">re-quotes</span>
-                                        </div>
-                                        <div class="track__plays">{{quote.reQoute}}</div>
-                                    </div>
-
-                                </div>
-
-                                <button class="show-more button-light">Show 5 More</button>
-                                <!-- / -->
+                                <div ng-view></div>
 
                             </div>
 

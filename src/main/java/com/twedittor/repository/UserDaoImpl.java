@@ -25,8 +25,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public List<User> findFollowers(Long uid) {
-        return getResultListForNamedQuery("User.findFollowers", new String[]{"uid"}, new Object[]{uid});
+    public List<User> findFollowers(User user) {
+        return getResultListForNamedQuery("User.findFollowers", new String[]{"uid"}, new Object[]{user});
     }
 
 }

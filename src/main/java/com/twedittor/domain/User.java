@@ -1,5 +1,6 @@
 package com.twedittor.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "user", schema = "twedittor")
-@NamedQuery(name = "User.findFollowers",query = "select u from User u join u.following f where f.uid = :uid ")
+@NamedQuery(name = "User.findFollowers",query = "select u from User u join u.following f where f.followed = :uid ")
 public class User implements Serializable{
 
     @Id
@@ -23,9 +24,9 @@ public class User implements Serializable{
     @OneToMany(fetch = FetchType.LAZY, mappedBy="user")
     @JsonManagedReference
     private List<Quote> quotes;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "followers")
-    private List<User> following;
+    @OneToMany(mappedBy = "follower")
+    @JsonIgnore
+    private List<Relationship> following;
 
     public String getUserName() {
         return userName;
@@ -51,11 +52,11 @@ public class User implements Serializable{
         this.quotes = quotes;
     }
 
-    public List<User> getFollowing() {
+    public List<Relationship> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<User> following) {
+    public void setFollowing(List<Relationship> following) {
         this.following = following;
     }
 

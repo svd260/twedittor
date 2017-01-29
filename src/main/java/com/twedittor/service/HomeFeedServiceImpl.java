@@ -2,6 +2,7 @@ package com.twedittor.service;
 
 import com.twedittor.domain.Home;
 import com.twedittor.domain.Quote;
+import com.twedittor.domain.Relationship;
 import com.twedittor.domain.User;
 import com.twedittor.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,9 @@ public class HomeFeedServiceImpl implements HomeFeedService {
         Home home = new Home();
         User user =  userDao.findUserByUserId(userName);
         List<Quote> feedQuotes = new ArrayList<>();
-        List<User> follwing = user.getFollowing();
-        for(User f : follwing) {
-            feedQuotes.addAll(f.getQuotes());
+        List<Relationship> follwing = user.getFollowing();
+        for(Relationship f : follwing) {
+            feedQuotes.addAll(f.getFollowed().getQuotes());
         }
         Collections.sort(feedQuotes, Comparator.comparing(quote -> quote.getTimeStamp()));
 //                user.getFollowing().stream().map(u -> u.getQuotes()).
@@ -44,7 +45,7 @@ public class HomeFeedServiceImpl implements HomeFeedService {
         home.setLastName(user.getLastName());
         home.setQuotesFromFeed(feedQuotes);
         home.setFollowing(new Long(user.getFollowing().size()));  //TODO
-        home.setFollowers(new Long(userDao.findFollowers(user.getId()).size())); //TODO
+        home.setFollowers(new Long(userDao.findFollowers(user).size())); //TODO
         return home;
     }
 }
