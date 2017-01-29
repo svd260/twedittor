@@ -1,12 +1,14 @@
 package com.twedittor.controller;
 
 import com.twedittor.domain.Home;
+import com.twedittor.domain.Quote;
 import com.twedittor.service.HomeFeedService;
+import com.twedittor.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,11 +20,12 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     private final HomeFeedService homeFeedService;
-    private static final String USER_NAME = "userName";
+    private final QuoteService quoteService;
 
     @Autowired
-    public HomeController(HomeFeedService homeFeedService) {
+    public HomeController(HomeFeedService homeFeedService, QuoteService quoteService) {
         this.homeFeedService = homeFeedService;
+        this.quoteService = quoteService;
     }
 
     @ResponseBody
@@ -36,4 +39,15 @@ public class HomeController {
         return homeFeedService.getFeed("svd260");
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<String> postQuote(@RequestBody Quote quote) {
+        Boolean posted = quoteService.post(quote, "svd260");
+        ResponseEntity<String> responseEntity = null;
+        if(posted) {
+            responseEntity = new ResponseEntity<String>("posted Successfully", HttpStatus.OK);
+        } else {
+            responseEntity = new ResponseEntity<String>("post failed", HttpStatus.BAD_REQUEST);
+        }
+        return responseEntity;
+    }
 }
