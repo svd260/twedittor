@@ -1,5 +1,7 @@
 # twedittor
 
+**Still under development.
+
 This is a java web application written to showcase my skills as a Java developer.
 Idea is to create an application which contain features from twitter and reddit.
 
