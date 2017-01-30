@@ -52,4 +52,29 @@ public class Home {
     public void setFollowing(Long following) {
         this.following = following;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Home home = (Home) o;
+
+        if (firstName != null ? !firstName.equals(home.firstName) : home.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(home.lastName) : home.lastName != null) return false;
+        if (quotesFromFeed != null ? !quotesFromFeed.equals(home.quotesFromFeed) : home.quotesFromFeed != null)
+            return false;
+        if (followers != null ? !followers.equals(home.followers) : home.followers != null) return false;
+        return following != null ? following.equals(home.following) : home.following == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName != null ? firstName.hashCode() : 0;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (quotesFromFeed != null ? quotesFromFeed.hashCode() : 0);
+        result = 31 * result + (followers != null ? followers.hashCode() : 0);
+        result = 31 * result + (following != null ? following.hashCode() : 0);
+        return result;
+    }
 }
