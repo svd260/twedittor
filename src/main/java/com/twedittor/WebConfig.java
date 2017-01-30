@@ -20,6 +20,15 @@ public class WebConfig{//} extends WebMvcConfigurerAdapter{
 //                addResourceLocations("/resources/*");
 //    }
 
+//    @Bean
+//    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+//        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        jsonConverter.setObjectMapper(objectMapper);
+//        return jsonConverter;
+//    }
+
     @Bean
     public FilterRegistrationBean someFilterRegistration() {
 
