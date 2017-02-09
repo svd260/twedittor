@@ -1,11 +1,16 @@
 package com.twedittor;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
+import org.springframework.jms.config.JmsListenerContainerFactory;
+import org.springframework.jms.support.destination.DynamicDestinationResolver;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -13,6 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.jms.ConnectionFactory;
 import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -23,6 +29,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
+@EnableAutoConfiguration
 @PropertySource(value = { "classpath:application.properties" })
 public class JpaConfiguration {
 
@@ -72,5 +79,24 @@ public class JpaConfiguration {
         return txManager;
     }
 
+    @Bean
+    @Autowired
+    public JmsListenerContainerFactory<?> myFactory(ConnectionFactory connectionFactory) {
+        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory());
+        factory.setDestinationResolver(new DynamicDestinationResolver());
+        return factory;
+    }
+
+    @Bean
+    public ConnectionFactory connectionFactory() {
+        ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        return activeMQConnectionFactory;
+    }
+//
+//    @Bean
+//    public JmsTemplate jmsTemplate() {
+//        return new JmsTemplate();
+//    }
 }
 

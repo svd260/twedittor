@@ -7,4 +7,6 @@ import com.twedittor.domain.Quote;
  */
 public interface QuoteDao {
     void save(Quote quote);
+
+    Quote findById(Long quoteId);
 }
