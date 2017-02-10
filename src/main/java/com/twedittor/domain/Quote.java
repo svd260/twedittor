@@ -1,12 +1,12 @@
 package com.twedittor.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sumanthdommaraju on 1/24/17.
@@ -27,6 +27,8 @@ public class Quote implements Serializable{
     private int reQoute;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Comment> comments;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<User> likers;
     @Temporal(TemporalType.TIMESTAMP)
     private Date timeStamp;
 
@@ -84,5 +86,13 @@ public class Quote implements Serializable{
 
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public Set<User> getLikers() {
+        return likers;
+    }
+
+    public void setLikers(Set<User> likers) {
+        this.likers = likers;
     }
 }

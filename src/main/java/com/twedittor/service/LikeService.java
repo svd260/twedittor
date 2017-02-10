@@ -32,5 +32,4 @@ public class LikeService {
         jmsTemplate.convertAndSend(likesQueue, like);
     }
 
-
 }

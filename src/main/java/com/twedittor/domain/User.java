@@ -75,30 +75,27 @@ public class User implements Serializable{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        User user = (User) o;
-//
-//        if (uid != null ? !uid.equals(user.uid) : user.uid != null) return false;
-//        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-//        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
-//        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-//        if (quotes != null ? !quotes.equals(user.quotes) : user.quotes != null) return false;
-//        return following != null ? following.equals(user.following) : user.following == null;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = uid != null ? uid.hashCode() : 0;
-//        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-//        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-//        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-//        result = 31 * result + (quotes != null ? quotes.hashCode() : 0);
-//        result = 31 * result + (following != null ? following.hashCode() : 0);
-//        return result;
-//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!uid.equals(user.uid)) return false;
+        if (!userName.equals(user.userName)) return false;
+        if (!firstName.equals(user.firstName)) return false;
+        return lastName.equals(user.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = uid.hashCode();
+        result = 31 * result + userName.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        return result;
+    }
+
 }
